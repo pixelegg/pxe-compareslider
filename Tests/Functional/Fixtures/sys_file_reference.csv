@@ -1,0 +1,7 @@
+"sys_file_reference"
+,"uid","pid","uid_local","uid_foreign","tablenames","fieldname","deleted"
+,101,10,1,1,"tt_content","image_before",0
+,102,10,2,1,"tt_content","image_after",0
+,103,10,3,2,"tt_content","image_before",0
+,104,11,4,3,"tt_content","image_before",0
+,105,11,5,3,"tt_content","image_after",0

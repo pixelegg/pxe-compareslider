@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-10-28T00:00:00Z" product-name="pxe_compareslider">
+        <header/>
+        <body>
+            <trans-unit id="ctype.title">
+                <source>Compare slider (before/after)</source>
+            </trans-unit>
+            <trans-unit id="ctype.description">
+                <source>Two images on top of each other; visitors drag a handle to reveal more of the "before" or the "after" image.</source>
+            </trans-unit>
+            <trans-unit id="tab.slider">
+                <source>Slider</source>
+            </trans-unit>
+            <trans-unit id="flexform.sheet.main">
+                <source>Slider</source>
+            </trans-unit>
+            <trans-unit id="flexform.image_before">
+                <source>Image "before"</source>
+            </trans-unit>
+            <trans-unit id="flexform.image_before.description">
+                <source>Shown on the left (horizontal) or at the top (vertical). Use the same aspect ratio for both images.</source>
+            </trans-unit>
+            <trans-unit id="flexform.image_after">
+                <source>Image "after"</source>
+            </trans-unit>
+            <trans-unit id="flexform.image_after.description">
+                <source>Defines the size of the slider; the "before" image is fitted onto it.</source>
+            </trans-unit>
+            <trans-unit id="flexform.label_before">
+                <source>Label "before"</source>
+            </trans-unit>
+            <trans-unit id="flexform.label_after">
+                <source>Label "after"</source>
+            </trans-unit>
+            <trans-unit id="flexform.orientation">
+                <source>Orientation</source>
+            </trans-unit>
+            <trans-unit id="flexform.orientation.horizontal">
+                <source>Horizontal (handle moves left/right)</source>
+            </trans-unit>
+            <trans-unit id="flexform.orientation.vertical">
+                <source>Vertical (handle moves up/down)</source>
+            </trans-unit>
+            <trans-unit id="flexform.start_position">
+                <source>Start position (0–100 %)</source>
+            </trans-unit>
+            <trans-unit id="flexform.load_eager">
+                <source>Load images immediately (above the fold)</source>
+            </trans-unit>
+            <trans-unit id="flexform.load_eager.description">
+                <source>By default the images are lazy-loaded. Enable this for a slider that is visible without scrolling.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

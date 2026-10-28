@@ -1,0 +1,4 @@
+name: pixelegg/test-site
+label: Test site (fixture)
+dependencies:
+  - pixelegg/compareslider

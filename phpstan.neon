@@ -1,0 +1,18 @@
+includes:
+    - vendor/saschaegerer/phpstan-typo3/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - Classes
+        - Configuration
+        - Tests
+    excludePaths:
+        # Optional pxe_hub integration: only loaded when pxe_hub (not a dependency) is installed.
+        - Classes/Hub
+        - Configuration/Services.php
+    # Version-dependent calls (TYPO3 13 vs 14 signatures) carry @phpstan-ignore comments that
+    # match on one major only, so unmatched ignores must not fail the run.
+    reportUnmatchedIgnoredErrors: false
+    bootstrapFiles:
+        - vendor/autoload.php

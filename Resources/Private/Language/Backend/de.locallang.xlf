@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-10-28T00:00:00Z" product-name="pxe_compareslider">
+        <header/>
+        <body>
+            <trans-unit id="ctype.title">
+                <source>Compare slider (before/after)</source>
+                <target>Vergleichsslider (vorher/nachher)</target>
+            </trans-unit>
+            <trans-unit id="ctype.description">
+                <source>Two images on top of each other; visitors drag a handle to reveal more of the "before" or the "after" image.</source>
+                <target>Zwei Bilder übereinander; Besucher ziehen einen Griff und sehen mehr vom „Vorher“- oder vom „Nachher“-Bild.</target>
+            </trans-unit>
+            <trans-unit id="tab.slider">
+                <source>Slider</source>
+                <target>Slider</target>
+            </trans-unit>
+            <trans-unit id="flexform.sheet.main">
+                <source>Slider</source>
+                <target>Slider</target>
+            </trans-unit>
+            <trans-unit id="flexform.image_before">
+                <source>Image "before"</source>
+                <target>Bild „Vorher“</target>
+            </trans-unit>
+            <trans-unit id="flexform.image_before.description">
+                <source>Shown on the left (horizontal) or at the top (vertical). Use the same aspect ratio for both images.</source>
+                <target>Wird links (horizontal) bzw. oben (vertikal) gezeigt. Beide Bilder sollten dasselbe Seitenverhältnis haben.</target>
+            </trans-unit>
+            <trans-unit id="flexform.image_after">
+                <source>Image "after"</source>
+                <target>Bild „Nachher“</target>
+            </trans-unit>
+            <trans-unit id="flexform.image_after.description">
+                <source>Defines the size of the slider; the "before" image is fitted onto it.</source>
+                <target>Bestimmt die Größe des Sliders; das „Vorher“-Bild wird darauf eingepasst.</target>
+            </trans-unit>
+            <trans-unit id="flexform.label_before">
+                <source>Label "before"</source>
+                <target>Beschriftung „Vorher“</target>
+            </trans-unit>
+            <trans-unit id="flexform.label_after">
+                <source>Label "after"</source>
+                <target>Beschriftung „Nachher“</target>
+            </trans-unit>
+            <trans-unit id="flexform.orientation">
+                <source>Orientation</source>
+                <target>Ausrichtung</target>
+            </trans-unit>
+            <trans-unit id="flexform.orientation.horizontal">
+                <source>Horizontal (handle moves left/right)</source>
+                <target>Horizontal (Griff bewegt sich links/rechts)</target>
+            </trans-unit>
+            <trans-unit id="flexform.orientation.vertical">
+                <source>Vertical (handle moves up/down)</source>
+                <target>Vertikal (Griff bewegt sich hoch/runter)</target>
+            </trans-unit>
+            <trans-unit id="flexform.start_position">
+                <source>Start position (0–100 %)</source>
+                <target>Startposition (0–100 %)</target>
+            </trans-unit>
+            <trans-unit id="flexform.load_eager">
+                <source>Load images immediately (above the fold)</source>
+                <target>Bilder sofort laden (im sichtbaren Bereich)</target>
+            </trans-unit>
+            <trans-unit id="flexform.load_eager.description">
+                <source>By default the images are lazy-loaded. Enable this for a slider that is visible without scrolling.</source>
+                <target>Standardmäßig werden die Bilder verzögert geladen. Für einen Slider, der ohne Scrollen sichtbar ist, einschalten.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

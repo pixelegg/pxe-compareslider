@@ -1,0 +1,4 @@
+name: pixelegg/compareslider
+label: Compare slider (before/after)
+dependencies:
+  - typo3/fluid-styled-content

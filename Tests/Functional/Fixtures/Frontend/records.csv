@@ -1,0 +1,34 @@
+"pages"
+,"uid","pid","title","slug","deleted","hidden"
+,1,0,"Root","/",0,0
+,2,1,"Empty","/empty",0,0
+"sys_file_storage"
+,"uid","pid","name","driver","configuration","is_browsable","is_public","is_writable","is_online"
+,1,0,"fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""basePath""><value index=""vDEF"">fileadmin/</value></field><field index=""pathType""><value index=""vDEF"">relative</value></field><field index=""caseSensitive""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>",1,1,1,1
+"sys_file"
+,"uid","pid","storage","type","identifier","identifier_hash","folder_hash","extension","mime_type","name","sha1","size","missing"
+,1,0,1,2,"/before.png","0","0","png","image/png","before.png","0",5019,0
+,2,0,1,2,"/after.png","0","0","png","image/png","after.png","0",5020,0
+,3,0,1,2,"/after.webp","0","0","webp","image/webp","after.webp","0",172,0
+"sys_file_metadata"
+,"uid","pid","file","width","height","title","alternative"
+,1,0,1,1600,800,"","Before the renovation"
+,2,0,2,1600,800,"After title",""
+,3,0,3,320,160,"",""
+"tt_content"
+,"uid","pid","CType","header","header_layout","subheader","colPos","sorting","deleted","hidden","pi_flexform"
+,1,1,"pxe_compareslider","Kitchen",0,"Spring 2026",0,1,0,0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""main""><language index=""lDEF""><field index=""orientation""><value index=""vDEF"">vertical</value></field><field index=""start_position""><value index=""vDEF"">30</value></field><field index=""label_before""><value index=""vDEF"">Old</value></field><field index=""label_after""><value index=""vDEF"">New</value></field></language></sheet></data></T3FlexForms>"
+,2,1,"pxe_compareslider","",0,"",0,2,0,0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""main""><language index=""lDEF""><field index=""title""><value index=""vDEF"">Caption only</value></field><field index=""subtitle""><value index=""vDEF"">Legacy subtitle</value></field></language></sheet></data></T3FlexForms>"
+,3,1,"pxe_compareslider","",0,"",0,3,0,0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""main""><language index=""lDEF""><field index=""orientation""><value index=""vDEF"">horizontal</value></field><field index=""label_before""><value index=""vDEF"">Vorher</value></field></language></sheet></data></T3FlexForms>"
+,4,1,"pxe_compareslider","",0,"",0,4,0,0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""main""><language index=""lDEF""><field index=""title""><value index=""vDEF"">Legacy name</value></field><field index=""label_after""><value index=""vDEF"">Nachher</value></field><field index=""load_eager""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>"
+,5,1,"pxe_compareslider","Header wins",0,"",0,5,0,0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""main""><language index=""lDEF""><field index=""title""><value index=""vDEF"">Ignored legacy title</value></field></language></sheet></data></T3FlexForms>"
+"sys_file_reference"
+,"uid","pid","uid_local","uid_foreign","tablenames","fieldname","sorting_foreign","deleted","hidden"
+,1,1,1,1,"tt_content","image_before",1,0,0
+,2,1,2,1,"tt_content","image_after",1,0,0
+,3,1,1,3,"tt_content","image_before",1,0,0
+,4,1,2,3,"tt_content","image_after",1,0,0
+,5,1,1,4,"tt_content","image_before",1,0,0
+,6,1,3,4,"tt_content","image_after",1,0,0
+,7,1,1,5,"tt_content","image_before",1,0,0
+,8,1,3,5,"tt_content","image_after",1,0,0

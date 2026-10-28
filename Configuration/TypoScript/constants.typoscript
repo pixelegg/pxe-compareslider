@@ -1,0 +1,18 @@
+plugin.tx_pxecompareslider {
+    view {
+        # cat=pxe_compareslider/file; type=string; label=Template root path: Override the Fluid template (Compareslider.html) by pointing to your own directory.
+        templateRootPath = EXT:pxe_compareslider/Resources/Private/Templates/ContentElements/
+    }
+    settings {
+        # cat=pxe_compareslider/enable; type=boolean; label=Include assets on every page: 0 = CSS/JS are added only on pages that contain a slider (AssetCollector). 1 = add them site-wide via page.includeCSS / page.includeJSFooter, for themes that concatenate or compress assets (e.g. t3sbootstrap).
+        includeAssetsGlobally = 0
+        image {
+            # cat=pxe_compareslider/dims; type=int+; label=Maximum image width: Longest edge in pixels the images are scaled down to (never upscaled).
+            maxWidth = 1540
+            # cat=pxe_compareslider/dims; type=string; label=srcset widths: Comma-separated image widths for the srcset attribute. Empty = no srcset.
+            srcsetWidths = 480,768,1024,1540
+            # cat=pxe_compareslider/dims; type=string; label=sizes attribute: Value of the sizes attribute used together with srcset.
+            sizes = 100vw
+        }
+    }
+}

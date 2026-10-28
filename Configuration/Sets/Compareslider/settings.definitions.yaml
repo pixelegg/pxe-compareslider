@@ -1,0 +1,35 @@
+categories:
+  pxe_compareslider:
+    label: Compare slider (before/after)
+
+settings:
+  plugin.tx_pxecompareslider.view.templateRootPath:
+    label: Template root path
+    description: Override the Fluid template (Compareslider.html) by pointing to your own directory.
+    type: string
+    default: 'EXT:pxe_compareslider/Resources/Private/Templates/ContentElements/'
+    category: pxe_compareslider
+  plugin.tx_pxecompareslider.settings.includeAssetsGlobally:
+    label: Include assets on every page
+    description: 'Off: CSS and JavaScript are added only on pages that contain a slider (AssetCollector). On: added site-wide via page.includeCSS / page.includeJSFooter, for themes that concatenate or compress assets (e.g. t3sbootstrap).'
+    type: bool
+    default: false
+    category: pxe_compareslider
+  plugin.tx_pxecompareslider.settings.image.maxWidth:
+    label: Maximum image width
+    description: Longest edge in pixels the images are scaled down to (never upscaled).
+    type: int
+    default: 1540
+    category: pxe_compareslider
+  plugin.tx_pxecompareslider.settings.image.srcsetWidths:
+    label: srcset widths
+    description: Comma-separated image widths for the srcset attribute. Empty disables srcset.
+    type: string
+    default: '480,768,1024,1540'
+    category: pxe_compareslider
+  plugin.tx_pxecompareslider.settings.image.sizes:
+    label: sizes attribute
+    description: Value of the sizes attribute used together with srcset.
+    type: string
+    default: '100vw'
+    category: pxe_compareslider

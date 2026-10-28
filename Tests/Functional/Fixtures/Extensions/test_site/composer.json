@@ -1,0 +1,14 @@
+{
+    "name": "pixelegg/test-site",
+    "type": "typo3-cms-extension",
+    "description": "Test fixture: a site set that depends on pixelegg/compareslider and provides the PAGE object.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "*"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "test_site"
+        }
+    }
+}

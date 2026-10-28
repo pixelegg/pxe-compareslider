@@ -1,0 +1,20 @@
+/* pxe_compareslider backend module: core styling, only the thumbnail strip is custom. */
+.pxecs__thumbs {
+    width: 140px;
+    white-space: nowrap;
+}
+.pxecs__thumbs img {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.pxecs__thumbs img + img {
+    margin-left: 4px;
+}
+.pxecs__thumbMissing {
+    display: inline-block;
+    opacity: .5;
+}
+.pxecs__footer {
+    margin-top: 2rem;
+}

@@ -1,0 +1,52 @@
+# Site-wide includes, only active when the constant includeAssetsGlobally = 1.
+# Default (0): the Fluid template adds both files through the AssetCollector on pages
+# that actually contain a slider.
+page {
+    includeCSS.pxe_compareslider = EXT:pxe_compareslider/Resources/Public/Css/compareslider.css
+    includeCSS.pxe_compareslider.if.isTrue = {$plugin.tx_pxecompareslider.settings.includeAssetsGlobally}
+    includeJSFooter.pxe_compareslider = EXT:pxe_compareslider/Resources/Public/JavaScript/compareslider.js
+    includeJSFooter.pxe_compareslider.if.isTrue = {$plugin.tx_pxecompareslider.settings.includeAssetsGlobally}
+}
+
+lib.pxe_compareslider =< lib.contentElement
+lib.pxe_compareslider {
+    templateRootPaths {
+        20 = {$plugin.tx_pxecompareslider.view.templateRootPath}
+    }
+    settings {
+        includeAssetsGlobally = {$plugin.tx_pxecompareslider.settings.includeAssetsGlobally}
+        image {
+            maxWidth = {$plugin.tx_pxecompareslider.settings.image.maxWidth}
+            srcsetWidths = {$plugin.tx_pxecompareslider.settings.image.srcsetWidths}
+            sizes = {$plugin.tx_pxecompareslider.settings.image.sizes}
+        }
+    }
+}
+
+tt_content.pxe_compareslider =< lib.pxe_compareslider
+tt_content.pxe_compareslider {
+    templateName = Compareslider
+    dataProcessing {
+        10 = TYPO3\CMS\Frontend\DataProcessing\FlexFormProcessor
+        10 {
+            fieldName = pi_flexform
+            as = flexform
+        }
+        20 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        20 {
+            references {
+                table = tt_content
+                fieldName = image_before
+            }
+            as = image_before
+        }
+        30 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        30 {
+            references {
+                table = tt_content
+                fieldName = image_after
+            }
+            as = image_after
+        }
+    }
+}

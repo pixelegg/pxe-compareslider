@@ -1,0 +1,135 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+<f:section name="Content">
+<f:variable name="ll" value="LLL:EXT:pxe_compareslider/Resources/Private/Language/locallang_mod.xlf:" />
+
+<div class="pxecs">
+    <h1><f:translate key="{ll}module.title" /></h1>
+    <p class="lead"><f:translate key="{ll}module.intro" /></p>
+
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="h2 mb-0">{stats.total}</div>
+                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.elements" /></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="h2 mb-0">{stats.pages}</div>
+                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.pages" /></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card h-100{f:if(condition: stats.hidden, then: ' border-warning')}">
+                <div class="card-body">
+                    <div class="h2 mb-0">{stats.hidden}</div>
+                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.hidden" /></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card h-100{f:if(condition: stats.incomplete, then: ' border-danger')}">
+                <div class="card-body">
+                    <div class="h2 mb-0">{stats.incomplete}</div>
+                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.incomplete" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <f:if condition="{usages}">
+        <f:then>
+            <div class="table-fit">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-icon"></th>
+                            <th scope="col"><f:translate key="{ll}module.table.element" /></th>
+                            <th scope="col"><f:translate key="{ll}module.table.page" /></th>
+                            <th scope="col"><f:translate key="{ll}module.table.status" /></th>
+                            <th scope="col" class="col-control"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <f:for each="{usages}" as="usage">
+                            <tr>
+                                <td class="pxecs__thumbs">
+                                    <f:if condition="{usage.beforeThumb} && {usage.afterThumb}">
+                                        <f:then>
+                                            <f:image image="{usage.beforeThumb}" width="64c" height="40c" alt="{f:translate(key: '{ll}module.thumb.before')}" loading="lazy" />
+                                            <f:image image="{usage.afterThumb}" width="64c" height="40c" alt="{f:translate(key: '{ll}module.thumb.after')}" loading="lazy" />
+                                        </f:then>
+                                        <f:else>
+                                            <span class="pxecs__thumbMissing" title="{f:translate(key: '{ll}module.thumb.missing')}">
+                                                <core:icon identifier="mimetypes-x-content-image" size="medium" />
+                                            </span>
+                                        </f:else>
+                                    </f:if>
+                                </td>
+                                <td>
+                                    <a href="{usage.editUrl}" class="fw-bold">
+                                        <f:if condition="{usage.header}">
+                                            <f:then>{usage.header}</f:then>
+                                            <f:else><f:translate key="{ll}module.element.untitled" arguments="{0: usage.contentUid}" /></f:else>
+                                        </f:if>
+                                    </a>
+                                    <div class="text-body-secondary small">tt_content:{usage.contentUid}</div>
+                                </td>
+                                <td>
+                                    <a href="{usage.pageUrl}">{usage.pageTitle}</a>
+                                    <span class="text-body-secondary small">[{usage.pageUid}]</span>
+                                </td>
+                                <td>
+                                    <f:if condition="{usage.incomplete}">
+                                        <f:then><span class="badge badge-danger"><f:translate key="{ll}module.status.missingImage" /></span></f:then>
+                                        <f:else><span class="badge badge-success"><f:translate key="{ll}module.status.ok" /></span></f:else>
+                                    </f:if>
+                                    <f:if condition="{usage.hidden}">
+                                        <span class="badge badge-warning"><f:translate key="{ll}module.status.hidden" /></span>
+                                    </f:if>
+                                    <f:if condition="{usage.languageUid} > 0">
+                                        <span class="badge badge-info"><f:translate key="{ll}module.status.language" arguments="{0: usage.languageUid}" /></span>
+                                    </f:if>
+                                </td>
+                                <td class="col-control">
+                                    <div class="btn-group" role="group">
+                                        <a href="{usage.editUrl}" class="btn btn-default btn-sm" title="{f:translate(key: '{ll}module.action.edit')}">
+                                            <core:icon identifier="actions-open" size="small" />
+                                            <span class="visually-hidden"><f:translate key="{ll}module.action.edit" /></span>
+                                        </a>
+                                        <a href="{usage.pageUrl}" class="btn btn-default btn-sm" title="{f:translate(key: '{ll}module.action.openPage')}">
+                                            <core:icon identifier="apps-pagetree-page-default" size="small" />
+                                            <span class="visually-hidden"><f:translate key="{ll}module.action.openPage" /></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="callout callout-info">
+                <div class="callout-body">
+                    <div class="callout-title"><f:translate key="{ll}module.empty.title" /></div>
+                    <f:translate key="{ll}module.empty.text" />
+                </div>
+            </div>
+        </f:else>
+    </f:if>
+
+    <p class="pxecs__footer text-body-secondary small">
+        <a href="https://www.pixelegg.de" target="_blank" rel="noopener"><f:translate key="{ll}module.footer" /></a>
+    </p>
+</div>
+
+</f:section>
+</html>

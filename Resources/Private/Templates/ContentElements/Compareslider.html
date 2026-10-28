@@ -1,0 +1,120 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cs="http://typo3.org/ns/Pixelegg/PxeCompareslider/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:comment>
+    Rendered through fluid_styled_content's Default layout: header, subheader, frame class and
+    spacing from the Appearance tab behave as for any core element.
+
+    Variables: data (tt_content row), flexform (FlexFormProcessor), image_before / image_after
+    (FilesProcessor, one FileReference each), settings (lib.contentElement + this extension's constants).
+
+    Legacy: records created with pxe_compareslider < 2.2 stored title / subtitle in the FlexForm.
+    They are still rendered as a caption as long as the header field is empty.
+</f:comment>
+<f:section name="Main">
+
+    <f:variable name="legacyTitle" value="" />
+    <f:variable name="legacySubtitle" value="" />
+    <f:if condition="!{data.header}">
+        <f:variable name="legacyTitle" value="{flexform.title}" />
+        <f:variable name="legacySubtitle" value="{flexform.subtitle}" />
+    </f:if>
+
+    <f:variable name="orientation" value="horizontal" />
+    <f:if condition="{flexform.orientation} == 'vertical'">
+        <f:variable name="orientation" value="vertical" />
+    </f:if>
+
+    <f:variable name="start" value="50" />
+    <f:if condition="{flexform.start_position} != ''">
+        <f:variable name="start" value="{flexform.start_position}" />
+    </f:if>
+
+    <f:variable name="loading" value="{settings.media.lazyLoading}" />
+    <f:if condition="{flexform.load_eager}">
+        <f:variable name="loading" value="eager" />
+    </f:if>
+
+    <f:comment>Accessible name of the handle: header, legacy FlexForm title, translated fallback.</f:comment>
+    <f:variable name="accessibleName" value="{f:translate(key: 'LLL:EXT:pxe_compareslider/Resources/Private/Language/locallang.xlf:slider.aria_label')}" />
+    <f:if condition="{legacyTitle}">
+        <f:variable name="accessibleName" value="{legacyTitle}" />
+    </f:if>
+    <f:if condition="{data.header}">
+        <f:variable name="accessibleName" value="{data.header}" />
+    </f:if>
+
+    <f:if condition="{image_before.0} && {image_after.0}">
+        <f:if condition="!{settings.includeAssetsGlobally}">
+            <f:asset.css identifier="pxe_compareslider" href="EXT:pxe_compareslider/Resources/Public/Css/compareslider.css" />
+            <f:asset.script identifier="pxe_compareslider" src="EXT:pxe_compareslider/Resources/Public/JavaScript/compareslider.js" defer="true" />
+        </f:if>
+
+        <div class="compareslider compareslider--{orientation}"
+             data-orientation="{orientation}"
+             data-start="{start}">
+
+            <div class="compareslider__media compareslider__media--after">
+                <f:render section="Image" arguments="{file: image_after.0, label: flexform.label_after, settings: settings, loading: loading}" />
+                <f:if condition="{flexform.label_after}">
+                    <span class="compareslider__label compareslider__label--after">{flexform.label_after}</span>
+                </f:if>
+            </div>
+
+            <div class="compareslider__media compareslider__media--before">
+                <f:render section="Image" arguments="{file: image_before.0, label: flexform.label_before, settings: settings, loading: loading}" />
+                <f:if condition="{flexform.label_before}">
+                    <span class="compareslider__label compareslider__label--before">{flexform.label_before}</span>
+                </f:if>
+            </div>
+
+            <div class="compareslider__handle"
+                 role="slider"
+                 tabindex="0"
+                 aria-label="{accessibleName}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="{start}"
+                 aria-valuetext="{start} %"
+                 aria-orientation="{orientation}"></div>
+        </div>
+    </f:if>
+
+    <f:if condition="{legacyTitle} || {legacySubtitle}">
+        <div class="compareslider__caption">
+            <f:if condition="{legacyTitle}"><p class="compareslider__title"><strong>{legacyTitle}</strong></p></f:if>
+            <f:if condition="{legacySubtitle}"><p>{legacySubtitle -> f:format.nl2br()}</p></f:if>
+        </div>
+    </f:if>
+
+</f:section>
+
+<f:section name="Image">
+    <f:comment>
+        alt: FAL "alternative" text, then the FAL title, then the slider label. Both images are
+        informative (they are what is being compared), so an empty alt is the last resort only.
+        width / height come from the processed file (no layout shift), srcset from the constants.
+    </f:comment>
+    <f:variable name="alt" value="{label}" />
+    <f:if condition="{file.title}">
+        <f:variable name="alt" value="{file.title}" />
+    </f:if>
+    <f:if condition="{file.alternative}">
+        <f:variable name="alt" value="{file.alternative}" />
+    </f:if>
+    <f:variable name="srcset" value="" />
+    <f:if condition="{settings.image.srcsetWidths}">
+        <f:variable name="srcset" value="{cs:srcset(image: file, widths: settings.image.srcsetWidths)}" />
+    </f:if>
+    <f:if condition="{srcset}">
+        <f:then>
+            <f:image image="{file}" class="compareslider__img" maxWidth="{settings.image.maxWidth}" alt="{alt}" loading="{loading}" srcset="{srcset}" sizes="{settings.image.sizes}" draggable="false" />
+        </f:then>
+        <f:else>
+            <f:image image="{file}" class="compareslider__img" maxWidth="{settings.image.maxWidth}" alt="{alt}" loading="{loading}" draggable="false" />
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>

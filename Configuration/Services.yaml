@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Pixelegg\PxeCompareslider\:
+    resource: '../Classes/*'
+    # Hub/ is registered conditionally in Services.php (only when pxe_hub is installed).
+    exclude:
+      - '../Classes/Hub/*'
+
+  Pixelegg\PxeCompareslider\Service\CompareSliderUsageService:
+    public: true
+
+  Pixelegg\PxeCompareslider\Controller\Backend\OverviewController:
+    public: true
