@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+# The functional tests process images (srcset). They run inside the official TYPO3
+# core-testing images, which ship PHP, Composer and a working ImageMagick, so CI
+# behaves exactly like a local run with the same image.
 jobs:
   tests:
     name: TYPO3 ${{ matrix.typo3 }} / PHP ${{ matrix.php }}
@@ -19,46 +22,38 @@ jobs:
           - { typo3: '^13.4', php: '8.4', testing-framework: '^8.2', phpunit: '^11.5' }
           - { typo3: '^14.0', php: '8.3', testing-framework: '^9.0', phpunit: '^12.0' }
           - { typo3: '^14.0', php: '8.4', testing-framework: '^9.0', phpunit: '^12.0' }
+    env:
+      IMAGE: ghcr.io/typo3/core-testing-php${{ matrix.php == '8.2' && '82' || matrix.php == '8.3' && '83' || '84' }}:latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up PHP ${{ matrix.php }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: intl, mbstring, pdo_sqlite, gd, zip
-          coverage: none
-          tools: composer:v2
-
-      - name: Install ImageMagick (image processing in functional tests)
-        run: sudo apt-get update -q && sudo apt-get install -y -q imagemagick
+      - name: Pull test image
+        run: docker pull -q "$IMAGE"
 
       - name: Pin TYPO3 ${{ matrix.typo3 }}
         run: |
-          composer require --no-update \
+          ./.github/run-in-image.sh composer require --no-update \
             "typo3/cms-core:${{ matrix.typo3 }}" \
             "typo3/cms-backend:${{ matrix.typo3 }}" \
             "typo3/cms-extbase:${{ matrix.typo3 }}" \
             "typo3/cms-fluid:${{ matrix.typo3 }}" \
             "typo3/cms-fluid-styled-content:${{ matrix.typo3 }}" \
             "typo3/cms-frontend:${{ matrix.typo3 }}"
-          composer require --no-update --dev \
+          ./.github/run-in-image.sh composer require --no-update --dev \
             "typo3/testing-framework:${{ matrix.testing-framework }}" \
             "phpunit/phpunit:${{ matrix.phpunit }}"
 
       - name: Install dependencies
-        run: composer update --no-interaction --no-progress --prefer-dist
+        run: ./.github/run-in-image.sh composer update --no-interaction --no-progress --prefer-dist
 
       - name: Coding standards
-        run: composer ci:cs
+        run: ./.github/run-in-image.sh composer ci:cs
 
       - name: PHPStan
-        run: composer ci:stan
+        run: ./.github/run-in-image.sh composer ci:stan
 
       - name: Unit tests
-        run: composer ci:test
+        run: ./.github/run-in-image.sh composer ci:test
 
       - name: Functional tests (sqlite)
-        run: composer ci:test:functional
-        env:
-          typo3DatabaseDriver: pdo_sqlite
+        run: ./.github/run-in-image.sh composer ci:test:functional
