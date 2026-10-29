@@ -18,10 +18,16 @@
             <trans-unit id="module.intro">
                 <source>All before/after sliders of this installation, with health checks and links to edit each element or open its page.</source>
             </trans-unit>
-            <trans-unit id="module.stats.elements">
+            <trans-unit id="module.stats.elements.one">
+                <source>Element</source>
+            </trans-unit>
+            <trans-unit id="module.stats.elements.other">
                 <source>Elements</source>
             </trans-unit>
-            <trans-unit id="module.stats.pages">
+            <trans-unit id="module.stats.pages.one">
+                <source>Page</source>
+            </trans-unit>
+            <trans-unit id="module.stats.pages.other">
                 <source>Pages</source>
             </trans-unit>
             <trans-unit id="module.stats.hidden">
@@ -75,8 +81,20 @@
             <trans-unit id="module.empty.text">
                 <source>Add a "Compare slider (before/after)" content element to a page and it will show up here.</source>
             </trans-unit>
-            <trans-unit id="module.footer">
-                <source>pxe_compareslider · pixelegg.de</source>
+            <trans-unit id="module.number.thousandsSeparator">
+                <source>,</source>
+            </trans-unit>
+            <trans-unit id="hub.status.unused">
+                <source>Not used yet</source>
+            </trans-unit>
+            <trans-unit id="hub.status.count.one">
+                <source>%s element</source>
+            </trans-unit>
+            <trans-unit id="hub.status.count.other">
+                <source>%s elements</source>
+            </trans-unit>
+            <trans-unit id="hub.action.open">
+                <source>Open module</source>
             </trans-unit>
         </body>
     </file>

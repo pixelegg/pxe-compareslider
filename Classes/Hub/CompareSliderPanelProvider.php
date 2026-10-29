@@ -9,6 +9,7 @@ use Pixelegg\PxeHub\Panel\PanelAction;
 use Pixelegg\PxeHub\Panel\PanelProvider;
 use Pixelegg\PxeHub\Panel\PanelStatus;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Localization\LanguageService;
 
 /**
  * Gives Compare Slider a card in pxe_hub (icon + usage metric + link to its module).
@@ -30,7 +31,7 @@ final readonly class CompareSliderPanelProvider implements PanelProvider
 
     public function getLabel(): string
     {
-        return 'Compare slider';
+        return $this->translate('module.title');
     }
 
     public function getIcon(): string
@@ -46,7 +47,13 @@ final readonly class CompareSliderPanelProvider implements PanelProvider
     public function getStatus(): PanelStatus
     {
         $count = count($this->usageService->getUsages());
-        return $count === 0 ? PanelStatus::unknown('Not used yet') : PanelStatus::ok($count . ' elements');
+        if ($count === 0) {
+            return PanelStatus::unknown($this->translate('hub.status.unused'));
+        }
+        return PanelStatus::ok(sprintf(
+            $this->translate($count === 1 ? 'hub.status.count.one' : 'hub.status.count.other'),
+            number_format($count, 0, '', $this->translate('module.number.thousandsSeparator'))
+        ));
     }
 
     /** @return array<int,\Pixelegg\PxeHub\Panel\Metric> */
@@ -60,7 +67,16 @@ final readonly class CompareSliderPanelProvider implements PanelProvider
     public function getActions(): array
     {
         return [
-            new PanelAction('Open module', (string)$this->uriBuilder->buildUriFromRoute('pxe_compareslider')),
+            new PanelAction($this->translate('hub.action.open'), (string)$this->uriBuilder->buildUriFromRoute('pxe_compareslider')),
         ];
+    }
+
+    private function translate(string $key): string
+    {
+        $languageService = $GLOBALS['LANG'] ?? null;
+        $label = $languageService instanceof LanguageService
+            ? $languageService->sL('LLL:EXT:pxe_compareslider/Resources/Private/Language/locallang_mod.xlf:' . $key)
+            : '';
+        return $label !== '' ? $label : $key;
     }
 }

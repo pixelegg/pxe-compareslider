@@ -10,38 +10,10 @@
     <p class="lead"><f:translate key="{ll}module.intro" /></p>
 
     <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="h2 mb-0">{stats.total}</div>
-                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.elements" /></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="h2 mb-0">{stats.pages}</div>
-                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.pages" /></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card h-100{f:if(condition: stats.hidden, then: ' border-warning')}">
-                <div class="card-body">
-                    <div class="h2 mb-0">{stats.hidden}</div>
-                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.hidden" /></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card h-100{f:if(condition: stats.incomplete, then: ' border-danger')}">
-                <div class="card-body">
-                    <div class="h2 mb-0">{stats.incomplete}</div>
-                    <div class="text-body-secondary"><f:translate key="{ll}module.stats.incomplete" /></div>
-                </div>
-            </div>
-        </div>
+        <f:render section="Stat" arguments="{ll: ll, value: stats.total, label: 'module.stats.elements', countable: 1}" />
+        <f:render section="Stat" arguments="{ll: ll, value: stats.pages, label: 'module.stats.pages', countable: 1}" />
+        <f:render section="Stat" arguments="{ll: ll, value: stats.hidden, label: 'module.stats.hidden', highlight: 'warning'}" />
+        <f:render section="Stat" arguments="{ll: ll, value: stats.incomplete, label: 'module.stats.incomplete', highlight: 'danger'}" />
     </div>
 
     <f:if condition="{usages}">
@@ -127,9 +99,33 @@
     </f:if>
 
     <p class="pxecs__footer text-body-secondary small">
-        <a href="https://www.pixelegg.de" target="_blank" rel="noopener"><f:translate key="{ll}module.footer" /></a>
+        pxe_compareslider <span aria-hidden="true">·</span> <a href="https://www.pixelegg.de" target="_blank" rel="noopener noreferrer">pixelegg.de</a>
     </p>
 </div>
 
+</f:section>
+
+<f:section name="Stat">
+    <f:comment>
+        One counter card. "countable" labels have singular/plural forms in the XLF
+        ({label}.one / {label}.other); the number uses the locale's thousands separator.
+    </f:comment>
+    <f:variable name="labelKey" value="{label}" />
+    <f:if condition="{countable}">
+        <f:then>
+            <f:if condition="{value} == 1">
+                <f:then><f:variable name="labelKey" value="{label}.one" /></f:then>
+                <f:else><f:variable name="labelKey" value="{label}.other" /></f:else>
+            </f:if>
+        </f:then>
+    </f:if>
+    <div class="col-6 col-md-3">
+        <div class="card h-100{f:if(condition: '{highlight} && {value}', then: ' border-{highlight}')}">
+            <div class="card-body">
+                <div class="h2 mb-0"><f:format.number decimals="0" thousandsSeparator="{f:translate(key: '{ll}module.number.thousandsSeparator')}">{value}</f:format.number></div>
+                <div class="text-body-secondary"><f:translate key="{ll}{labelKey}" /></div>
+            </div>
+        </div>
+    </div>
 </f:section>
 </html>

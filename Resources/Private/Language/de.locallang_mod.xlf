@@ -23,11 +23,19 @@
                 <source>All before/after sliders of this installation, with health checks and links to edit each element or open its page.</source>
                 <target>Alle Vorher/Nachher-Slider dieser Installation, mit Prüfung auf fehlende Bilder und Links zum Bearbeiten des Elements oder zur Seite.</target>
             </trans-unit>
-            <trans-unit id="module.stats.elements">
+            <trans-unit id="module.stats.elements.one">
+                <source>Element</source>
+                <target>Element</target>
+            </trans-unit>
+            <trans-unit id="module.stats.elements.other">
                 <source>Elements</source>
                 <target>Elemente</target>
             </trans-unit>
-            <trans-unit id="module.stats.pages">
+            <trans-unit id="module.stats.pages.one">
+                <source>Page</source>
+                <target>Seite</target>
+            </trans-unit>
+            <trans-unit id="module.stats.pages.other">
                 <source>Pages</source>
                 <target>Seiten</target>
             </trans-unit>
@@ -99,9 +107,25 @@
                 <source>Add a "Compare slider (before/after)" content element to a page and it will show up here.</source>
                 <target>Legen Sie auf einer Seite ein Inhaltselement „Vergleichsslider (vorher/nachher)“ an – es erscheint dann hier.</target>
             </trans-unit>
-            <trans-unit id="module.footer">
-                <source>pxe_compareslider · pixelegg.de</source>
-                <target>pxe_compareslider · pixelegg.de</target>
+            <trans-unit id="module.number.thousandsSeparator">
+                <source>,</source>
+                <target>.</target>
+            </trans-unit>
+            <trans-unit id="hub.status.unused">
+                <source>Not used yet</source>
+                <target>Noch nicht verwendet</target>
+            </trans-unit>
+            <trans-unit id="hub.status.count.one">
+                <source>%s element</source>
+                <target>%s Element</target>
+            </trans-unit>
+            <trans-unit id="hub.status.count.other">
+                <source>%s elements</source>
+                <target>%s Elemente</target>
+            </trans-unit>
+            <trans-unit id="hub.action.open">
+                <source>Open module</source>
+                <target>Modul öffnen</target>
             </trans-unit>
         </body>
     </file>

@@ -8,14 +8,14 @@ A content element that stacks two images and lets visitors drag a handle to reve
 the "before" or the "after" image – horizontally or vertically. Vanilla JavaScript
 (~3 KB, no jQuery, no CDN), keyboard and touch accessible, responsive images.
 
-<!-- screenshots: Documentation/Images/frontend.png · Documentation/Images/backend-form.png -->
-<!-- ![Frontend](Documentation/Images/frontend.png) -->
-<!-- ![Backend form](Documentation/Images/backend-form.png) -->
+![Horizontal compare slider with the handle in the middle: muted landscape on the left, vivid version on the right](Documentation/Images/frontend-horizontal.png)
+
+*Horizontal slider on a demo page with a minimal theme, handle at the start position 50 %.*
 
 ## Features
 
-- Content element **Compare slider (before/after)** in the "Default" tab of the
-  new-content-element wizard
+- Content element **Compare slider (before/after)** in the tab "Typical page content" of
+  the new content element wizard
 - Core *Header* / *Subheader* fields and the full Appearance tab (header layout, frame,
   spacing) – it behaves like any fluid_styled_content element
 - Horizontal or vertical split, start position 0–100 %, optional labels on both images
@@ -50,14 +50,17 @@ Manager.
 Then load the TypoScript in the way that matches your site:
 
 **A – Site Set** (sites configured entirely through sets, no root `sys_template` record)
-Site Management → Sites → your site → *Sets* → add **Compare slider (before/after)**
-(`pixelegg/compareslider`), or list it under `dependencies` of your own set. The set
+Edit your site (TYPO3 13.4: *Site Management → Sites*, TYPO3 14: *Sites → Setup*) and add
+the set **Compare slider (before/after)** (`pixelegg/compareslider`), or list it under
+`dependencies` of your own set. The set
 depends on `typo3/fluid-styled-content` and pulls it in automatically. Settings can be
 changed in the site's *Settings* editor.
 
 **B – Static template** (sites with a root `sys_template` record)
-Template → your root template → *Includes* → add **Compare slider (before/after)** after
-*Fluid Styled Content*. Settings are TypoScript constants (see below).
+Module *TypoScript* (TYPO3 13.4: under *Site Management*, TYPO3 14: under *Sites*) → edit
+the root TypoScript record → tab *Advanced Options* → *Include TypoScript sets* → add
+**Compare slider (before/after)** after *Fluid Styled Content*. Settings are TypoScript
+constants (see below).
 
 Both load the same setup. Note that TYPO3 13/14 ignore set TypoScript as soon as the root
 page has a `sys_template` record, so on such sites only B takes effect.
@@ -67,7 +70,13 @@ Flush caches afterwards. No database changes are needed: all element data lives 
 
 ## Usage
 
-1. Add a content element, choose **Compare slider (before/after)** from the *Default* tab.
+1. Add a content element, choose **Compare slider (before/after)** from the tab
+   *Typical page content* (same name in TYPO3 13.4 and 14).
+
+   ![New content element wizard with Compare slider (before/after) in the first tab](Documentation/Images/new-content-wizard.png)
+
+   *The element in the new content element wizard (TYPO3 14, tab "Typical page content").*
+
 2. *General* tab: header (optional – it is also the accessible name of the handle) and
    subheader.
 3. *Slider* tab:
@@ -81,11 +90,19 @@ Flush caches afterwards. No database changes are needed: all element data lives 
 | Start position | Initial handle position in percent, default 50. |
 | Load images immediately | Switches `loading="lazy"` off for a slider that is visible without scrolling. |
 
+![Tab "Slider" of the editing form with the two image fields, labels, orientation, start position and the switch for loading the images immediately](Documentation/Images/backend-edit-form.png)
+
+*Editing form, tab "Slider".*
+
 4. *Appearance* tab: header layout, frame class, spacing – as for every core element.
 
 The slider renders only when **both** images are set; otherwise nothing is shown.
 Header layout *Hidden* keeps the header out of the markup but still uses it as the
 handle's accessible name.
+
+![Vertical compare slider: the muted image on top, the vivid image below the handle](Documentation/Images/frontend-vertical.png)
+
+*Vertical orientation.*
 
 ### Keyboard and touch
 
@@ -136,6 +153,10 @@ BEM block `compareslider` (`compareslider--vertical`, `compareslider__media--bef
 | `--cs-focus-color` | `#2b6cb0` | Focus ring |
 | `--cs-label-color` / `--cs-label-bg` | `#fff` / `rgba(0,0,0,.6)` | Label text / background |
 
+Labels sit in a corner of their own image: horizontal "before" top left / "after" top
+right, vertical "before" top left / "after" bottom left. They are covered together with
+their image when the handle moves over them, so a label never ends up on the wrong image.
+
 There are no animations, so nothing needs a `prefers-reduced-motion` override.
 
 ### Markup contract (for custom templates)
@@ -154,9 +175,16 @@ and writes `--cs-pos` on the root element.
 
 ## Backend module
 
-**Compare slider** (below *Web*) lists all slider elements with page, status (OK, missing
-image, hidden, language) and buttons to edit the element or open the page. Available to
-all backend users; restrict it via the usual module access settings if needed.
+**Compare slider** is a top-level entry of the module menu, placed after the page module
+group (*Web* in TYPO3 13.4, *Content* in TYPO3 14). It lists all slider elements with
+page, status (OK, missing image, hidden, language) and buttons to edit the element or
+open the page. Available to all backend users; restrict it via the usual module access
+settings if needed.
+
+![Backend module with counters for elements, pages, hidden and incomplete sliders and a table with thumbnails, page, status and edit buttons](Documentation/Images/backend-module.png)
+
+*The backend module. A hidden draft with only one image is flagged as "Missing image".
+German interface: [screenshot](Documentation/Images/backend-module-de.png).*
 
 ### Optional: pxe_hub
 

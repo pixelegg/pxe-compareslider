@@ -107,21 +107,42 @@
 .compareslider__label {
     position: absolute;
     top: .75rem;
+    max-width: calc(50% - 1.5rem);
     padding: .15rem .6rem;
+    overflow: hidden;
     font-size: .85rem;
     line-height: 1.4;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: var(--cs-label-color);
     background: var(--cs-label-bg);
     border-radius: 3px;
     pointer-events: none;
 }
 
+/*
+ * Each label sits on its own image, in the corner where that image is visible at the
+ * start position: horizontal "before" top left / "after" top right, vertical "before"
+ * top left / "after" bottom left. A label is covered (or clipped) together with its
+ * image when the handle moves over it, so it never ends up on the wrong image.
+ */
 .compareslider__label--before {
     left: .75rem;
 }
 
 .compareslider__label--after {
     right: .75rem;
+}
+
+.compareslider--vertical .compareslider__label {
+    max-width: calc(100% - 1.5rem);
+}
+
+.compareslider--vertical .compareslider__label--after {
+    top: auto;
+    right: auto;
+    bottom: .75rem;
+    left: .75rem;
 }
 
 .compareslider__caption {
@@ -133,6 +154,10 @@
     .compareslider__handle,
     .compareslider__handle::after {
         background: Canvas;
+        border: 1px solid CanvasText;
+    }
+
+    .compareslider__label {
         border: 1px solid CanvasText;
     }
 }

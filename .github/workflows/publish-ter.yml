@@ -61,6 +61,7 @@ jobs:
       - name: Publish to TER
         if: steps.token.outputs.present == 'true'
         run: |
-          COMMENT="$(sed -n '/^## \['"${{ steps.version.outputs.version }}"'\]/,/^## \[/p' CHANGELOG.md | sed '1d;$d' | head -c 1800)"
-          [ -n "$COMMENT" ] || COMMENT="Release ${{ steps.version.outputs.version }}"
-          ~/.composer/vendor/bin/tailor ter:publish --comment "$COMMENT" "${{ steps.version.outputs.version }}"
+          # CHANGELOG section of the version as plain text (TER does not render Markdown)
+          python3 .github/ter-comment.py "${{ steps.version.outputs.version }}" > "$RUNNER_TEMP/ter-comment.txt"
+          cat "$RUNNER_TEMP/ter-comment.txt"
+          ~/.composer/vendor/bin/tailor ter:publish --comment "$(cat "$RUNNER_TEMP/ter-comment.txt")" "${{ steps.version.outputs.version }}"
