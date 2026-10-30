@@ -4,7 +4,7 @@ pxe_compareslider
 
 :Extension key: pxe_compareslider
 :Package name:  pixelegg/pxe-compareslider
-:Version:       2.2.0
+:Version:       |release|
 :Language:      en
 :Author:        pixelegg
 :License:       GPL-2.0-or-later
